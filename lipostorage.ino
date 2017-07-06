@@ -12,10 +12,33 @@
 // to sense battery voltage.
 #define PIN_BATTERY_DIVIDED A1
 // Measured resistance of 68k and 15k voltage divider resistors.
-#define DIVIDER_HIGH 68.5
-#define DIVIDER_LOW 14.91
-// Actual "1.1v" internal reference value, determined empirically.
-#define VOLTAGE_REF 1.060
+#define DIVIDER_HIGH 67.5
+#define DIVIDER_LOW 14.88
+
+// Actual "1.1v" internal reference value.
+#define VOLTAGE_REF 1.081
+/*
+To calculate the actual internal reference value:
+1.  Upload the sketch with measured DIVIDER_* values and VOLTAGE_REF=1.1.
+2.  Measure actual voltage and reported voltage.
+3.  Determine the correct VOLTAGE_REF:
+    observed_total =
+    actual_total =
+    used_aref = 1.1
+    3a. What analog value did we see? This won't change after fixing constants.
+        observed_divided = observed_total * (
+            divider_low / (divider_low + divider_high))
+        analog_value = int(1024 * observed_divided / used_aref)
+    3b. What aref value makes the analog value produce the correct total?
+        actual_divided = actual_total * (
+            divider_low / (divider_low + divider_high))
+        actual_aref = actual_divided * (1024.0 / analog_value)
+    3c. Check the result.
+        check_divided = actual_aref * (analog_value / 1024.0)
+        check_total = check_divided * (
+            (divider_low + divider_high) / divider_low)
+4. Re-upload with corrected VOLTAGE_REF.
+*/
 
 // Storage voltage for LiPo battery cells.
 #define VOLTAGE_TARGET 3.85
