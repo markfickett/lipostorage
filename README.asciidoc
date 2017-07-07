@@ -1,0 +1,3 @@
+Discharge a 1-3s (or more) LiPo battery to storage voltage. This uses an ATtiny85 to sense voltage and control a high-power LED to drain a LiPo to 3.85v for storage.
+
+http://www.markfickett.com/stuff/artPage.php?id=395[Circuit diagram, photos, and parts list].

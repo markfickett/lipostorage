@@ -1,0 +1,41 @@
+<p>Discharge a 1-3s (or more) LiPo battery to storage voltage. This uses an ATtiny85 to sense voltage and control a high-power LED to drain a LiPo to 3.85v for storage.</p>
+
+<p>This circuit is for one cell of a LiPo battery. It can be repeated in parallel for an arbitrary number of cells. Thus, the circuit runs on up to 4.2v (for a freshly charged LiPo cell), down to around 3.8v (storage voltage, at which the load is turned off).</p>
+
+<p><a href="https://github.com/markfickett/lipostorage">Code on GitHub</a>.</p>
+
+<h2>Circuit</h2>
+
+<img src="arduino/lipostorage/170706circuitdiagram700.png" alt="circuit diagram" />
+
+<h3>Parts List (one cell)</h3>
+
+<ul>
+  <li>ATtiny85 (the internal "1.1v" voltage source must be calibrated)</li>
+  <li>8-pin DIP socket</li>
+  <li>High-power load LED (<a href="https://www.sparkfun.com/products/retired/9656">Luxeon Rebel</a>)</li>
+  <li>1N4001 diode (&gt; 0.5A, reduces voltage to the load LED)</li>
+  <li>Status LED (red)</li>
+  <li>82&Omega; resistor (for status LED)</li>
+  <li>68k&Omega; resistor (voltage divider, must be calibrated)</li>
+  <li>15k&Omega; resistor (voltage divider, must be calibrated)</li>
+  <li>150&Omega; resistor (for MOSFET)</li>
+  <li>N-MOSFET (to control load; for example <a href="https://www.sparkfun.com/products/10213">from SparkFun</a>; or a transistor with <a href="https://teachmetomake.wordpress.com/how-to-use-a-transistor-as-a-switch/">high DC collector/base gain hfe</a> such as <a href="http://www.mouser.com/ProductDetail/ON-Semiconductor/TIP120G/">TIP120</a>)</li>
+  <li>Heat sinks for the MOSFETs (<a href="https://www.adafruit.com/product/977">clip-on</a> requires some room to the sides; <a href="https://www.adafruit.com/category/151">other shapes</a> allow different arrangement)</li>
+</ul>
+
+<p>A right-angle male-male header can connect the circuit to the balance JST connector of a LiPo battery.</p>
+
+<h2>Gallery</h2>
+
+<p>I built a 3s discharger, and used a mint tin with holes punched in it as a heat sink for the LEDs (attached with <a href="https://www.adafruit.com/product/1468">thermal tape</a>). Depending on how far open the tin is, this can provide a desk light, reading lamp, or night-light while discharging.</p>
+
+<img src="arduino/lipostorage/170706dark700.jpg" alt="low light, tin closed" />
+
+<img src="arduino/lipostorage/170706light700.jpg" alt="more light, tin open" />
+
+<p>I mounted the discharger on perf board, and left room to add dischargers for more cells if I get batteries that need it later.</p>
+
+<img src="arduino/lipostorage/170706circuittop700.jpg" alt="circuit top" />
+
+<img src="arduino/lipostorage/170706circuitbottom700.jpg" alt="circuit bottom" />
