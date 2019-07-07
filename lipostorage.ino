@@ -52,7 +52,7 @@ To calculate the actual internal reference value:
 
 #define PIN_STATUS_LED 0
 
-LEDMorseSender voltageSender(PIN_STATUS_LED, 8.0 /* WPM */);
+LEDMorseSender voltageSender(PIN_STATUS_LED, 8.0f /* WPM */);
 
 float batteryVoltage;
 int checkCountdown;
