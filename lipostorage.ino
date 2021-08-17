@@ -22,31 +22,8 @@ To calculate the actual internal reference value:
 1.  Upload the sketch with measured DIVIDER_* values and VOLTAGE_REF=1.1.
 2.  Measure actual battery voltage (with a voltmeter) and reported voltage
     (from Morse code on the status LED).
-3.  Determine the correct VOLTAGE_REF:
-    observed_total = 3.85  # For example, the ATTiny85 thinks it's done...
-    actual_total = 3.96  # ...but a voltmeter says it's still high.
-    used_aref = 1.1
-    3a. What analog value did we see? This won't change after fixing constants.
-        # The pin on the ATTiny85 saw this divided voltage, for example 0.67v.
-        observed_divided = observed_total * (
-            divider_low / (divider_low + divider_high))
-        # Thus this is the analogRead value the ATTiny85 got back, ex: 658.
-        analog_value = int(1024 * observed_divided / used_aref)
-    3b. What aref value makes the analog value produce the correct total?
-        # A voltmeter should agree with this value at the voltage divider,
-        # presented to the ATTiny85 pin. For example, 0.713v.
-        actual_divided = actual_total * (
-            divider_low / (divider_low + divider_high))
-        # Finally, this is the ATTiny85's actual internal voltage reference,
-        # for example 1.113v.
-        actual_aref = actual_divided * (1024.0 / analog_value)
-    3c. Check the result.
-        # With our new aref value, this value based on the analog read should
-        # agree with the voltage measured by a voltmeter, ex: 3.96v.
-        check_divided = actual_aref * (analog_value / 1024.0)
-        check_total = check_divided * (
-            (divider_low + divider_high) / divider_low)
-4. Re-upload with corrected VOLTAGE_REF.
+3.  Determine the correct VOLTAGE_REF using calculate_aref.py.
+4.  Re-upload with corrected VOLTAGE_REF (and same DIVIDER_) values.
 */
 
 // Storage voltage for LiPo battery cells.
